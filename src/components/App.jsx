@@ -21,14 +21,14 @@ const styles = theme => ({
 });
 
 class App extends Component {
-  // state = {
-  //   up: true
-  // }
-  // toggle = () => {
-  //   this.setState({
-  //     up: !this.state.up
-  //   })
-  // }
+  state = {
+    up: true
+  }
+  toggle = () => {
+    this.setState({
+      up: !this.state.up
+    })
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -44,13 +44,17 @@ class App extends Component {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell>
+                <TableCell onClick={this.toggle}>
                   ID
+                  <i className="material-icons" onClick={this.props.sort}>
+                    { this.state.up ? 'arrow_drop_down' : 'arrow_drop_up' }
+                    
+                  </i>
                 </TableCell>
-                <TableCell align="right">
-                  <i className="material-icons arrow" onClick={this.props.sort}>
-                    {/* { this.state.up ? 'arrow_drop_up' : 'arrow_drop_down' } */}
-                    arrow_drop_up
+                <TableCell align="right" onClick={this.toggle}>
+                <i className="material-icons" onClick={this.props.sortable}>
+                    { this.state.up ? 'arrow_drop_down' : 'arrow_drop_up' }
+                    
                   </i>
                   first name
                 </TableCell>
@@ -73,12 +77,12 @@ class App extends Component {
                   return (
                     <TableRow key={i}>
                       <TableCell component="th" scope="row">
-                        {item.id}
+                        {item.id ? item.id : null}
                       </TableCell>
-                      <TableCell align="right">{item.firstName}</TableCell>
-                      <TableCell align="right">{item.lastName}</TableCell>
-                      <TableCell align="right">{item.email}</TableCell>
-                      <TableCell align="right">{item.phone}</TableCell>
+                      <TableCell align="right">{item.firstName ? item.firstName : null}</TableCell>
+                      <TableCell align="right">{item.lastName ? item.lastName : null}</TableCell>
+                      <TableCell align="right">{item.email ? item.email : null}</TableCell>
+                      <TableCell align="right">{item.phone ? item.phone : null}</TableCell>
                     </TableRow>
                   );
                 })
